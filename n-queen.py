@@ -7,6 +7,13 @@ grid = [
     [0, 0, 0, 0, 0, 0],
 ]
 
+grid = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+]
+
 
 def solve(grid):
     row = find_empty(grid)
@@ -15,6 +22,7 @@ def solve(grid):
         return True
 
     for col in range(len(grid[0])):
+        print(validate((row, col), grid), row, col)
         if validate((row, col), grid):
             grid[row][col] = 1
 
@@ -22,6 +30,7 @@ def solve(grid):
                 return True
             else:
                 grid[row][col] = 0
+    # if
     return False
 
 
@@ -53,7 +62,8 @@ def validate(pos, grid):
         back = True
     # Check diagonal \
     while True:
-        if n >= len(grid)-1 or m >= len(grid[0])-1:
+        print(n, m)
+        if n > len(grid)-1 or m > len(grid[0])-1:
             break
         if back:
             n -= 1
@@ -64,6 +74,8 @@ def validate(pos, grid):
                 back = False
                 n, m = pos
         if not back:
+            if n == len(grid)-1 or m == len(grid[0])-1:
+                break
             n += 1
             m += 1
             if grid[n][m] == 1:
@@ -76,6 +88,7 @@ def validate(pos, grid):
         back = False
     # Check Diagonal/
     while True:
+        print(n, m)
         if n >= len(grid)-1 or m >= len(grid[0])-1:
             break
         if back:
@@ -87,6 +100,8 @@ def validate(pos, grid):
                 back = False
                 n, m = pos
         if not back:
+            if n == len(grid)-1 or m == len(grid[0])-1:
+                break
             n -= 1
             m += 1
             if grid[n][m] == 1:
@@ -99,7 +114,7 @@ def print_grid(grid):
 
         for j in range(len(grid[0])):
 
-            if j == 5:
+            if j == len(grid[0])-1:
                 print(grid[i][j])
             else:
                 print(str(grid[i][j]) + " ", end="")
