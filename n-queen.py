@@ -7,22 +7,20 @@ grid = [
     [0, 0, 0, 0, 0, 0],
 ]
 
-grid = [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0]
-]
+combinations = 0
 
 
 def solve(grid):
     row = find_empty(grid)
+    if row == len(grid)-1:
+        global combinations
+        combinations += 1
 
     if row == None:
         return True
 
     for col in range(len(grid[0])):
-        print(validate((row, col), grid), row, col)
+        print(row, col, validate((row, col), grid))
         if validate((row, col), grid):
             grid[row][col] = 1
 
@@ -62,9 +60,6 @@ def validate(pos, grid):
         back = True
     # Check diagonal \
     while True:
-        print(n, m)
-        if n > len(grid)-1 or m > len(grid[0])-1:
-            break
         if back:
             n -= 1
             m -= 1
@@ -82,16 +77,17 @@ def validate(pos, grid):
                 return False
 
     n, m = pos
-    if n == 0 or m == 0:
+    if n == 0:
         back = True
+    elif m == 0:
+        back = False
     else:
         back = False
     # Check Diagonal/
     while True:
-        print(n, m)
-        if n >= len(grid)-1 or m >= len(grid[0])-1:
-            break
         if back:
+            if n == len(grid)-1 or m == 0:
+                break
             n += 1
             m -= 1
             if grid[n][m] == 1:
@@ -100,7 +96,7 @@ def validate(pos, grid):
                 back = False
                 n, m = pos
         if not back:
-            if n == len(grid)-1 or m == len(grid[0])-1:
+            if n == 0 or m == len(grid[0])-1:
                 break
             n -= 1
             m += 1
@@ -122,3 +118,4 @@ def print_grid(grid):
 
 solve(grid)
 print_grid(grid)
+print(combinations)
