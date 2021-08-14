@@ -1,3 +1,5 @@
+## GRIDS OF SIZE 4x4 AND UP
+
 grid = [
     [0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
@@ -6,21 +8,33 @@ grid = [
     [0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0],
 ]
+grid = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+]
 
-combinations = 0
+# grid = [
+#     [0, 0, 0, 0],
+#     [0, 0, 0, 0],
+#     [0, 0, 0, 0],
+#     [0, 0, 0, 0]
+# ]
 
 
 def solve(grid):
     row = find_empty(grid)
-    if row == len(grid)-1:
-        global combinations
-        combinations += 1
-
     if row == None:
         return True
 
     for col in range(len(grid[0])):
-        print(row, col, validate((row, col), grid))
         if validate((row, col), grid):
             grid[row][col] = 1
 
@@ -118,4 +132,3 @@ def print_grid(grid):
 
 solve(grid)
 print_grid(grid)
-print(combinations)
